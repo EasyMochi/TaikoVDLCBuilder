@@ -158,4 +158,10 @@ public partial class DlcSelector : Form
         for (int i = 0; i <= (DBView.Rows.Count - 1); i++)
             Global.Database.Items[i].isChecked = false;
     }
+
+    // Whether to include Official Vita DLCs
+    private void includeVitaDlc_CheckedChanged(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }

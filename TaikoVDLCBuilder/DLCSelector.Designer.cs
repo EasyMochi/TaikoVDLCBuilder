@@ -28,267 +28,277 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DlcSelector));
-            this.RunButton = new System.Windows.Forms.Button();
-            this.DBView = new System.Windows.Forms.DataGridView();
-            this.genreName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RunPBar = new System.Windows.Forms.ProgressBar();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.RandomButton = new System.Windows.Forms.Button();
-            this.ClearButton = new System.Windows.Forms.Button();
-            this.BottomPanel = new System.Windows.Forms.Panel();
-            this.IntroLabel = new System.Windows.Forms.Label();
-            this.TopPanel = new System.Windows.Forms.Panel();
-            this.isCheckedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameJPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.folderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.starEasyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.starNormalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.starHardDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.starManiaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.starUraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.songItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.DBView)).BeginInit();
-            this.BottomPanel.SuspendLayout();
-            this.TopPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.songItemBindingSource)).BeginInit();
-            this.SuspendLayout();
+            RunButton = new System.Windows.Forms.Button();
+            DBView = new System.Windows.Forms.DataGridView();
+            isCheckedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            nameJPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            folderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            genreName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            starEasyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            starNormalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            starHardDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            starManiaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            starUraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            sourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            songItemBindingSource = new System.Windows.Forms.BindingSource(components);
+            RunPBar = new System.Windows.Forms.ProgressBar();
+            notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
+            RandomButton = new System.Windows.Forms.Button();
+            ClearButton = new System.Windows.Forms.Button();
+            BottomPanel = new System.Windows.Forms.Panel();
+            IntroLabel = new System.Windows.Forms.Label();
+            TopPanel = new System.Windows.Forms.Panel();
+            includeVitaDlc = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)DBView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)songItemBindingSource).BeginInit();
+            BottomPanel.SuspendLayout();
+            TopPanel.SuspendLayout();
+            SuspendLayout();
             // 
             // RunButton
             // 
-            this.RunButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RunButton.Location = new System.Drawing.Point(544, 0);
-            this.RunButton.Margin = new System.Windows.Forms.Padding(1);
-            this.RunButton.Name = "RunButton";
-            this.RunButton.Size = new System.Drawing.Size(100, 40);
-            this.RunButton.TabIndex = 1;
-            this.RunButton.Text = "Run";
-            this.RunButton.UseVisualStyleBackColor = true;
-            this.RunButton.Click += new System.EventHandler(this.RunButton_Click);
+            RunButton.Dock = System.Windows.Forms.DockStyle.Right;
+            RunButton.Location = new System.Drawing.Point(634, 0);
+            RunButton.Margin = new System.Windows.Forms.Padding(1);
+            RunButton.Name = "RunButton";
+            RunButton.Size = new System.Drawing.Size(117, 46);
+            RunButton.TabIndex = 1;
+            RunButton.Text = "Run";
+            RunButton.UseVisualStyleBackColor = true;
+            RunButton.Click += RunButton_Click;
             // 
             // DBView
             // 
-            this.DBView.AllowUserToAddRows = false;
-            this.DBView.AllowUserToDeleteRows = false;
-            this.DBView.AllowUserToOrderColumns = true;
-            this.DBView.AutoGenerateColumns = false;
-            this.DBView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DBView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.isCheckedDataGridViewCheckBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.nameJPDataGridViewTextBoxColumn,
-            this.folderDataGridViewTextBoxColumn,
-            this.genreName,
-            this.starEasyDataGridViewTextBoxColumn,
-            this.starNormalDataGridViewTextBoxColumn,
-            this.starHardDataGridViewTextBoxColumn,
-            this.starManiaDataGridViewTextBoxColumn,
-            this.starUraDataGridViewTextBoxColumn,
-            this.sourceDataGridViewTextBoxColumn});
-            this.DBView.DataSource = this.songItemBindingSource;
-            this.DBView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DBView.Location = new System.Drawing.Point(0, 100);
-            this.DBView.Margin = new System.Windows.Forms.Padding(1);
-            this.DBView.Name = "DBView";
-            this.DBView.RowTemplate.Height = 46;
-            this.DBView.Size = new System.Drawing.Size(644, 346);
-            this.DBView.TabIndex = 2;
-            this.DBView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DBView_DataBindingComplete);
-            // 
-            // genreName
-            // 
-            this.genreName.DataPropertyName = "genreName";
-            this.genreName.Frozen = true;
-            this.genreName.HeaderText = "Genre";
-            this.genreName.MinimumWidth = 40;
-            this.genreName.Name = "genreName";
-            this.genreName.ReadOnly = true;
-            this.genreName.Width = 80;
-            // 
-            // RunPBar
-            // 
-            this.RunPBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.RunPBar.Location = new System.Drawing.Point(0, 446);
-            this.RunPBar.Margin = new System.Windows.Forms.Padding(2);
-            this.RunPBar.Name = "RunPBar";
-            this.RunPBar.Size = new System.Drawing.Size(644, 15);
-            this.RunPBar.TabIndex = 3;
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            // 
-            // RandomButton
-            // 
-            this.RandomButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.RandomButton.Location = new System.Drawing.Point(0, 0);
-            this.RandomButton.Name = "RandomButton";
-            this.RandomButton.Size = new System.Drawing.Size(100, 40);
-            this.RandomButton.TabIndex = 4;
-            this.RandomButton.Text = "Randomize";
-            this.RandomButton.UseVisualStyleBackColor = true;
-            this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
-            // 
-            // ClearButton
-            // 
-            this.ClearButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ClearButton.Location = new System.Drawing.Point(100, 0);
-            this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(100, 40);
-            this.ClearButton.TabIndex = 5;
-            this.ClearButton.Text = "Clear";
-            this.ClearButton.UseVisualStyleBackColor = true;
-            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
-            // 
-            // BottomPanel
-            // 
-            this.BottomPanel.Controls.Add(this.RunButton);
-            this.BottomPanel.Controls.Add(this.ClearButton);
-            this.BottomPanel.Controls.Add(this.RandomButton);
-            this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 461);
-            this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(644, 40);
-            this.BottomPanel.TabIndex = 6;
-            // 
-            // IntroLabel
-            // 
-            this.IntroLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.IntroLabel.Location = new System.Drawing.Point(0, 0);
-            this.IntroLabel.Name = "IntroLabel";
-            this.IntroLabel.Size = new System.Drawing.Size(644, 100);
-            this.IntroLabel.TabIndex = 7;
-            this.IntroLabel.Text = "Label";
-            this.IntroLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // TopPanel
-            // 
-            this.TopPanel.Controls.Add(this.IntroLabel);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(644, 100);
-            this.TopPanel.TabIndex = 8;
+            DBView.AllowUserToAddRows = false;
+            DBView.AllowUserToDeleteRows = false;
+            DBView.AllowUserToOrderColumns = true;
+            DBView.AutoGenerateColumns = false;
+            DBView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DBView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { isCheckedDataGridViewCheckBoxColumn, nameDataGridViewTextBoxColumn, nameJPDataGridViewTextBoxColumn, folderDataGridViewTextBoxColumn, genreName, starEasyDataGridViewTextBoxColumn, starNormalDataGridViewTextBoxColumn, starHardDataGridViewTextBoxColumn, starManiaDataGridViewTextBoxColumn, starUraDataGridViewTextBoxColumn, sourceDataGridViewTextBoxColumn });
+            DBView.DataSource = songItemBindingSource;
+            DBView.Dock = System.Windows.Forms.DockStyle.Fill;
+            DBView.Location = new System.Drawing.Point(0, 115);
+            DBView.Margin = new System.Windows.Forms.Padding(1);
+            DBView.Name = "DBView";
+            DBView.RowTemplate.Height = 46;
+            DBView.Size = new System.Drawing.Size(751, 400);
+            DBView.TabIndex = 2;
+            DBView.DataBindingComplete += DBView_DataBindingComplete;
             // 
             // isCheckedDataGridViewCheckBoxColumn
             // 
-            this.isCheckedDataGridViewCheckBoxColumn.DataPropertyName = "isChecked";
-            this.isCheckedDataGridViewCheckBoxColumn.Frozen = true;
-            this.isCheckedDataGridViewCheckBoxColumn.HeaderText = "Select";
-            this.isCheckedDataGridViewCheckBoxColumn.MinimumWidth = 20;
-            this.isCheckedDataGridViewCheckBoxColumn.Name = "isCheckedDataGridViewCheckBoxColumn";
-            this.isCheckedDataGridViewCheckBoxColumn.Width = 50;
+            isCheckedDataGridViewCheckBoxColumn.DataPropertyName = "isChecked";
+            isCheckedDataGridViewCheckBoxColumn.Frozen = true;
+            isCheckedDataGridViewCheckBoxColumn.HeaderText = "Select";
+            isCheckedDataGridViewCheckBoxColumn.MinimumWidth = 20;
+            isCheckedDataGridViewCheckBoxColumn.Name = "isCheckedDataGridViewCheckBoxColumn";
+            isCheckedDataGridViewCheckBoxColumn.Width = 50;
             // 
             // nameDataGridViewTextBoxColumn
             // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            this.nameDataGridViewTextBoxColumn.Frozen = true;
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            nameDataGridViewTextBoxColumn.Frozen = true;
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            nameDataGridViewTextBoxColumn.Width = 100;
             // 
             // nameJPDataGridViewTextBoxColumn
             // 
-            this.nameJPDataGridViewTextBoxColumn.DataPropertyName = "nameJP";
-            this.nameJPDataGridViewTextBoxColumn.Frozen = true;
-            this.nameJPDataGridViewTextBoxColumn.HeaderText = "Japanese Name";
-            this.nameJPDataGridViewTextBoxColumn.Name = "nameJPDataGridViewTextBoxColumn";
-            this.nameJPDataGridViewTextBoxColumn.ReadOnly = true;
+            nameJPDataGridViewTextBoxColumn.DataPropertyName = "nameJP";
+            nameJPDataGridViewTextBoxColumn.Frozen = true;
+            nameJPDataGridViewTextBoxColumn.HeaderText = "Japanese Name";
+            nameJPDataGridViewTextBoxColumn.Name = "nameJPDataGridViewTextBoxColumn";
+            nameJPDataGridViewTextBoxColumn.ReadOnly = true;
+            nameJPDataGridViewTextBoxColumn.Width = 100;
             // 
             // folderDataGridViewTextBoxColumn
             // 
-            this.folderDataGridViewTextBoxColumn.DataPropertyName = "folder";
-            this.folderDataGridViewTextBoxColumn.HeaderText = "folder";
-            this.folderDataGridViewTextBoxColumn.Name = "folderDataGridViewTextBoxColumn";
-            this.folderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.folderDataGridViewTextBoxColumn.Visible = false;
+            folderDataGridViewTextBoxColumn.DataPropertyName = "folder";
+            folderDataGridViewTextBoxColumn.HeaderText = "folder";
+            folderDataGridViewTextBoxColumn.Name = "folderDataGridViewTextBoxColumn";
+            folderDataGridViewTextBoxColumn.ReadOnly = true;
+            folderDataGridViewTextBoxColumn.Visible = false;
+            folderDataGridViewTextBoxColumn.Width = 100;
+            // 
+            // genreName
+            // 
+            genreName.DataPropertyName = "genreName";
+            genreName.Frozen = true;
+            genreName.HeaderText = "Genre";
+            genreName.MinimumWidth = 40;
+            genreName.Name = "genreName";
+            genreName.ReadOnly = true;
+            genreName.Width = 80;
             // 
             // starEasyDataGridViewTextBoxColumn
             // 
-            this.starEasyDataGridViewTextBoxColumn.DataPropertyName = "strEasy";
-            this.starEasyDataGridViewTextBoxColumn.Frozen = true;
-            this.starEasyDataGridViewTextBoxColumn.HeaderText = "★ Easy";
-            this.starEasyDataGridViewTextBoxColumn.MinimumWidth = 20;
-            this.starEasyDataGridViewTextBoxColumn.Name = "starEasyDataGridViewTextBoxColumn";
-            this.starEasyDataGridViewTextBoxColumn.ReadOnly = true;
-            this.starEasyDataGridViewTextBoxColumn.Width = 50;
+            starEasyDataGridViewTextBoxColumn.DataPropertyName = "strEasy";
+            starEasyDataGridViewTextBoxColumn.Frozen = true;
+            starEasyDataGridViewTextBoxColumn.HeaderText = "★ Easy";
+            starEasyDataGridViewTextBoxColumn.MinimumWidth = 20;
+            starEasyDataGridViewTextBoxColumn.Name = "starEasyDataGridViewTextBoxColumn";
+            starEasyDataGridViewTextBoxColumn.ReadOnly = true;
+            starEasyDataGridViewTextBoxColumn.Width = 50;
             // 
             // starNormalDataGridViewTextBoxColumn
             // 
-            this.starNormalDataGridViewTextBoxColumn.DataPropertyName = "strNormal";
-            this.starNormalDataGridViewTextBoxColumn.Frozen = true;
-            this.starNormalDataGridViewTextBoxColumn.HeaderText = "★ Normal";
-            this.starNormalDataGridViewTextBoxColumn.MinimumWidth = 20;
-            this.starNormalDataGridViewTextBoxColumn.Name = "starNormalDataGridViewTextBoxColumn";
-            this.starNormalDataGridViewTextBoxColumn.ReadOnly = true;
-            this.starNormalDataGridViewTextBoxColumn.Width = 50;
+            starNormalDataGridViewTextBoxColumn.DataPropertyName = "strNormal";
+            starNormalDataGridViewTextBoxColumn.Frozen = true;
+            starNormalDataGridViewTextBoxColumn.HeaderText = "★ Normal";
+            starNormalDataGridViewTextBoxColumn.MinimumWidth = 20;
+            starNormalDataGridViewTextBoxColumn.Name = "starNormalDataGridViewTextBoxColumn";
+            starNormalDataGridViewTextBoxColumn.ReadOnly = true;
+            starNormalDataGridViewTextBoxColumn.Width = 50;
             // 
             // starHardDataGridViewTextBoxColumn
             // 
-            this.starHardDataGridViewTextBoxColumn.DataPropertyName = "strHard";
-            this.starHardDataGridViewTextBoxColumn.Frozen = true;
-            this.starHardDataGridViewTextBoxColumn.HeaderText = "★ Hard";
-            this.starHardDataGridViewTextBoxColumn.MinimumWidth = 20;
-            this.starHardDataGridViewTextBoxColumn.Name = "starHardDataGridViewTextBoxColumn";
-            this.starHardDataGridViewTextBoxColumn.ReadOnly = true;
-            this.starHardDataGridViewTextBoxColumn.Width = 50;
+            starHardDataGridViewTextBoxColumn.DataPropertyName = "strHard";
+            starHardDataGridViewTextBoxColumn.Frozen = true;
+            starHardDataGridViewTextBoxColumn.HeaderText = "★ Hard";
+            starHardDataGridViewTextBoxColumn.MinimumWidth = 20;
+            starHardDataGridViewTextBoxColumn.Name = "starHardDataGridViewTextBoxColumn";
+            starHardDataGridViewTextBoxColumn.ReadOnly = true;
+            starHardDataGridViewTextBoxColumn.Width = 50;
             // 
             // starManiaDataGridViewTextBoxColumn
             // 
-            this.starManiaDataGridViewTextBoxColumn.DataPropertyName = "strMania";
-            this.starManiaDataGridViewTextBoxColumn.Frozen = true;
-            this.starManiaDataGridViewTextBoxColumn.HeaderText = "★ Extreme";
-            this.starManiaDataGridViewTextBoxColumn.MinimumWidth = 20;
-            this.starManiaDataGridViewTextBoxColumn.Name = "starManiaDataGridViewTextBoxColumn";
-            this.starManiaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.starManiaDataGridViewTextBoxColumn.Width = 50;
+            starManiaDataGridViewTextBoxColumn.DataPropertyName = "strMania";
+            starManiaDataGridViewTextBoxColumn.Frozen = true;
+            starManiaDataGridViewTextBoxColumn.HeaderText = "★ Extreme";
+            starManiaDataGridViewTextBoxColumn.MinimumWidth = 20;
+            starManiaDataGridViewTextBoxColumn.Name = "starManiaDataGridViewTextBoxColumn";
+            starManiaDataGridViewTextBoxColumn.ReadOnly = true;
+            starManiaDataGridViewTextBoxColumn.Width = 50;
             // 
             // starUraDataGridViewTextBoxColumn
             // 
-            this.starUraDataGridViewTextBoxColumn.DataPropertyName = "strUra";
-            this.starUraDataGridViewTextBoxColumn.HeaderText = "★ Oni";
-            this.starUraDataGridViewTextBoxColumn.MinimumWidth = 20;
-            this.starUraDataGridViewTextBoxColumn.Name = "starUraDataGridViewTextBoxColumn";
-            this.starUraDataGridViewTextBoxColumn.ReadOnly = true;
-            this.starUraDataGridViewTextBoxColumn.Width = 50;
+            starUraDataGridViewTextBoxColumn.DataPropertyName = "strUra";
+            starUraDataGridViewTextBoxColumn.HeaderText = "★ Oni";
+            starUraDataGridViewTextBoxColumn.MinimumWidth = 20;
+            starUraDataGridViewTextBoxColumn.Name = "starUraDataGridViewTextBoxColumn";
+            starUraDataGridViewTextBoxColumn.ReadOnly = true;
+            starUraDataGridViewTextBoxColumn.Width = 50;
             // 
             // sourceDataGridViewTextBoxColumn
             // 
-            this.sourceDataGridViewTextBoxColumn.DataPropertyName = "source";
-            this.sourceDataGridViewTextBoxColumn.HeaderText = "source";
-            this.sourceDataGridViewTextBoxColumn.Name = "sourceDataGridViewTextBoxColumn";
-            this.sourceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sourceDataGridViewTextBoxColumn.Visible = false;
+            sourceDataGridViewTextBoxColumn.DataPropertyName = "source";
+            sourceDataGridViewTextBoxColumn.HeaderText = "source";
+            sourceDataGridViewTextBoxColumn.Name = "sourceDataGridViewTextBoxColumn";
+            sourceDataGridViewTextBoxColumn.ReadOnly = true;
+            sourceDataGridViewTextBoxColumn.Visible = false;
+            sourceDataGridViewTextBoxColumn.Width = 100;
             // 
             // songItemBindingSource
             // 
-            this.songItemBindingSource.DataSource = typeof(TaikoVDLCBuilder.SongItem);
+            songItemBindingSource.DataSource = typeof(TaikoVDLCBuilder.SongItem);
             // 
-            // DLCSelector
+            // RunPBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 501);
-            this.Controls.Add(this.DBView);
-            this.Controls.Add(this.TopPanel);
-            this.Controls.Add(this.RunPBar);
-            this.Controls.Add(this.BottomPanel);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(1);
-            this.Name = "DlcSelector";
-            this.Text = "Taiko no Tatsujin V Version - DLC Builder";
-            this.Load += new System.EventHandler(this.DLCSelector_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DBView)).EndInit();
-            this.BottomPanel.ResumeLayout(false);
-            this.TopPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.songItemBindingSource)).EndInit();
-            this.ResumeLayout(false);
-
+            RunPBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            RunPBar.Location = new System.Drawing.Point(0, 515);
+            RunPBar.Margin = new System.Windows.Forms.Padding(2);
+            RunPBar.Name = "RunPBar";
+            RunPBar.Size = new System.Drawing.Size(751, 17);
+            RunPBar.TabIndex = 3;
+            // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
+            // 
+            // RandomButton
+            // 
+            RandomButton.Dock = System.Windows.Forms.DockStyle.Left;
+            RandomButton.Location = new System.Drawing.Point(0, 0);
+            RandomButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            RandomButton.Name = "RandomButton";
+            RandomButton.Size = new System.Drawing.Size(117, 46);
+            RandomButton.TabIndex = 4;
+            RandomButton.Text = "Randomize";
+            RandomButton.UseVisualStyleBackColor = true;
+            RandomButton.Click += RandomButton_Click;
+            // 
+            // ClearButton
+            // 
+            ClearButton.Dock = System.Windows.Forms.DockStyle.Left;
+            ClearButton.Location = new System.Drawing.Point(117, 0);
+            ClearButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ClearButton.Name = "ClearButton";
+            ClearButton.Size = new System.Drawing.Size(117, 46);
+            ClearButton.TabIndex = 5;
+            ClearButton.Text = "Clear";
+            ClearButton.UseVisualStyleBackColor = true;
+            ClearButton.Click += ClearButton_Click;
+            // 
+            // BottomPanel
+            // 
+            BottomPanel.Controls.Add(includeVitaDlc);
+            BottomPanel.Controls.Add(RunButton);
+            BottomPanel.Controls.Add(ClearButton);
+            BottomPanel.Controls.Add(RandomButton);
+            BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            BottomPanel.Location = new System.Drawing.Point(0, 532);
+            BottomPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            BottomPanel.Name = "BottomPanel";
+            BottomPanel.Size = new System.Drawing.Size(751, 46);
+            BottomPanel.TabIndex = 6;
+            // 
+            // IntroLabel
+            // 
+            IntroLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            IntroLabel.Location = new System.Drawing.Point(0, 0);
+            IntroLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            IntroLabel.Name = "IntroLabel";
+            IntroLabel.Size = new System.Drawing.Size(751, 115);
+            IntroLabel.TabIndex = 7;
+            IntroLabel.Text = "Label";
+            IntroLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TopPanel
+            // 
+            TopPanel.Controls.Add(IntroLabel);
+            TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            TopPanel.Location = new System.Drawing.Point(0, 0);
+            TopPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            TopPanel.Name = "TopPanel";
+            TopPanel.Size = new System.Drawing.Size(751, 115);
+            TopPanel.TabIndex = 8;
+            // 
+            // includeVitaDlc
+            // 
+            includeVitaDlc.Location = new System.Drawing.Point(241, 0);
+            includeVitaDlc.Name = "includeVitaDlc";
+            includeVitaDlc.Size = new System.Drawing.Size(115, 45);
+            includeVitaDlc.TabIndex = 6;
+            includeVitaDlc.Text = "Include Vita DLC";
+            includeVitaDlc.UseVisualStyleBackColor = true;
+            includeVitaDlc.CheckedChanged += includeVitaDlc_CheckedChanged;
+            // 
+            // DlcSelector
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(751, 578);
+            Controls.Add(DBView);
+            Controls.Add(TopPanel);
+            Controls.Add(RunPBar);
+            Controls.Add(BottomPanel);
+            Icon = ((System.Drawing.Icon)resources.GetObject("$this.Icon"));
+            Margin = new System.Windows.Forms.Padding(1);
+            Text = "Taiko no Tatsujin V Version - DLC Builder";
+            Load += DLCSelector_Load;
+            ((System.ComponentModel.ISupportInitialize)DBView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)songItemBindingSource).EndInit();
+            BottomPanel.ResumeLayout(false);
+            TopPanel.ResumeLayout(false);
+            ResumeLayout(false);
         }
+
+        private System.Windows.Forms.CheckBox includeVitaDlc;
 
         #endregion
         private System.Windows.Forms.Button RunButton;
