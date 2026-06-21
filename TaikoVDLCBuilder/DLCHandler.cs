@@ -9,15 +9,15 @@ namespace TaikoVDLCBuilder;
 [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 public static class DlcHandler
 {
-    //Function to initialize conversion
+    // Initializes DLC conversion.
     public static void InitializeDlc(ProgressBar progress, List<SongItem> selectedSongs)
     {
-        // Initialize progress bar
+        // Initialize the progress bar.
         progress.Visible = true;
         progress.Value = 1;
         progress.Minimum = 1;
             
-        // Check if reAddcont exist and delete
+        // Delete the existing readdcont folder if it is present.
         if (Directory.Exists(Global.PathDlc))
         {
             MessageBox.Show(Global.MsgDlc2,Global.TlSongSl);
@@ -55,11 +55,11 @@ public static class DlcHandler
         progress.Visible = false;
     }
         
-    //Function to copy DLC files to output
+    // Copies DLC files to the output folder.
     private static void BuildDlc(SongItem song, uint id, string folderid)
     {
         string sourcePath = Global.PathSongs + song.folder;
-        //Check if folder exist
+        // Check whether the source folder exists.
         if (!Directory.Exists(sourcePath))
         {
             MessageBox.Show(song.folder + Global.MsgDlc3, Global.TlDlc2);
@@ -68,53 +68,53 @@ public static class DlcHandler
         string destinationPath = Global.PathWay1 + folderid + Global.PathWay2;
         Directory.CreateDirectory(destinationPath);
 
-        //Now create all the directories
+        // Create the directory tree.
         foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             Directory.CreateDirectory(dirPath.Replace(sourcePath, destinationPath));
 
-        //Copy all the files & Replaces any files with the same name
+        // Copy all files and replace existing files with the same name.
         foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             File.Copy(newPath, newPath.Replace(sourcePath, destinationPath), true);
 
-        //Correct unique ID
+        // Patch the unique internal song ID.
         string songInfoPath = destinationPath + Global.PathSongDat;
             
-        //Check if file exist
+        // Check whether SongInfo.dat exists.
         if (!File.Exists(songInfoPath))
         {
             MessageBox.Show(Global.MsgDlc4, Global.TlDlc2);
             return;
         }
-        //Inject ID function
+        // Patch SongInfo.dat.
         InjectId(id, song.starUra, songInfoPath);
     }
         
-    //Function to inject unique ID into SongInfo.dat
+    // Patches the assigned internal ID into SongInfo.dat.
     private static void InjectId(uint id, int starUra, string path)
     {
-        const int idPos = 60; //ID Position: 0x3C
-        const int uraPos = 124; //Ura ID Position: 0x7C
+        const int idPos = 60; // ID position: 0x3C
+        const int uraPos = 124; // Ura ID position: 0x7C
         byte[] idBytes = BitConverter.GetBytes(id);
             
         using FileStream stream = new(path, FileMode.Open, FileAccess.ReadWrite);
             
-        // inject ID into SongInfo.dat
+        // Write the normal chart ID.
         stream.Position = idPos;
         stream.WriteByte(idBytes[0]);
         stream.Position = idPos + 1;
         stream.WriteByte(idBytes[1]);
             
-        // Check if Ura exist in song
+        // Stop here if the song does not have an Ura chart.
         if (starUra <= 0) return;
         byte[] idUraBytes = BitConverter.GetBytes(id + 1);
             
-        // inject ura ID into SongInfo.dat
+        // Write the Ura chart ID.
         stream.Position = uraPos;
         stream.WriteByte(idUraBytes[0]);
         stream.Position = uraPos + 1;
         stream.WriteByte(idUraBytes[1]);
                 
-        // repeat normal ID after Ura
+        // Write the linked normal chart ID after the Ura ID.
         stream.Position = uraPos + 2;
         stream.WriteByte(idBytes[0]);
         stream.Position = uraPos + 3;
@@ -157,14 +157,14 @@ public static class DlcHandler
         if (id is >= 200 and <= 319)
             return true;
 
-        // Base game story/special/test entries.
+        // Base game story, special, and test entries.
         if (id is >= 1000 and <= 1184)
             return true;
 
         return id == 2000;
     }
         
-    //Directory Deleter
+    // Deletes a directory recursively.
     private static void DeleteDirectory(string targetDir)
     {
         string[] files = Directory.GetFiles(targetDir);
@@ -182,7 +182,7 @@ public static class DlcHandler
         Directory.Delete(targetDir, false);
     }
         
-    //Function to sort by genre
+    // Sorts songs by genre.
     public static SongList OrganizeByGenre(SongList data)
     {
         List<SongItem> organized = new();
