@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Newtonsoft.Json;
@@ -12,7 +12,7 @@ public class SongList
 
 public class SongItem
 {
-    // List with genre names
+    // Genre display names.
     private readonly string[] _gnrNames =
     [
         "J-POP",
@@ -24,7 +24,7 @@ public class SongItem
         "Anime"
     ];
         
-    // List with genre colors
+    // Genre display colors.
     private readonly Color[] _gnrColors =
     [
         Color.SkyBlue,
@@ -36,7 +36,7 @@ public class SongItem
         Color.SandyBrown
     ];
         
-    // List with star names
+    // Star rating display strings.
     private readonly string[] _starNames =
     [
         "--",
