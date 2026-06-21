@@ -10,6 +10,8 @@ namespace TaikoVDLCBuilder;
 [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 public partial class DlcSelector : Form
 {
+    private const string VitaDlcSource = "VITADLC";
+
     public DlcSelector()
     {
         InitializeComponent();
@@ -31,11 +33,8 @@ public partial class DlcSelector : Form
             
         // Sort songs by genre.
         Global.Database = DlcHandler.OrganizeByGenre(Global.Database);
-        BindingSource source = new();
-        source.DataSource = Global.Database.Items;
         DBView.AutoSize = true;
-        DBView.DataSource = source;
-        DBView.Refresh();
+        RefreshSongList();
         IntroLabel.Text = Global.WlcmTxt;
     }
 
@@ -48,20 +47,20 @@ public partial class DlcSelector : Form
         // List selected songs.
         List<SongItem> selectedSongs = new();
 
-        // Count selected songs and used slots.
-        for (int i = 0; i <= (DBView.Rows.Count - 1); i++)
+        // Count selected songs and used slots from the currently visible list.
+        foreach (DataGridViewRow row in DBView.Rows)
         {
-            if (!Global.Database.Items[i].isChecked) continue;
+            if (row.DataBoundItem is not SongItem song || !song.isChecked) continue;
                 
             nSong++;
             nSlot++;
                 
             // Add one more slot if the song has an Ura chart.
-            if (Global.Database.Items[i].starUra > 0)
+            if (song.starUra > 0)
             {
                 nSlot++;
             }
-            selectedSongs.Add(Global.Database.Items[i]);
+            selectedSongs.Add(song);
         }
         string ms1 = Global.MsgSongSl1 + nSong + Global.MsgSongSl2 + nSlot + Global.MsgSongSl3;
         string ms2 = Global.MsgSongSl4 + (Global.Tslot - nSlot) + Global.MsgSongSl3;
@@ -97,7 +96,7 @@ public partial class DlcSelector : Form
         // Set the background color for each genre.
         foreach (DataGridViewRow row in DBView.Rows)
         {
-            SongItem rowObject = (SongItem)row.DataBoundItem;
+            if (row.DataBoundItem is not SongItem rowObject) continue;
             row.DefaultCellStyle.BackColor = rowObject.genreColor;
         }
             
@@ -112,35 +111,35 @@ public partial class DlcSelector : Form
         int rndSlot = 0;
         int rndSong = 0;
         Random rnd = new();
+        List<SongItem> visibleSongs = GetVisibleSongs();
             
         // Clear the current selection.
         ClearDb();
             
-        // Repeat until the limit is reached or all songs have been selected.
-        while (rndSong < Global.Tsong)
+        // Repeat until the limit is reached or all visible songs have been selected.
+        while (rndSong < Global.Tsong && rndSong < visibleSongs.Count)
         {
-            // Get a random song.
-            int idx = rnd.Next(DBView.Rows.Count);
+            // Get a random visible song.
+            int idx = rnd.Next(visibleSongs.Count);
+            SongItem song = visibleSongs[idx];
                 
             // Select the song only if it is not already selected.
-            if (!Global.Database.Items[idx].isChecked)
+            if (!song.isChecked)
             {
-                Global.Database.Items[idx].isChecked = true;
+                song.isChecked = true;
                 rndSlot++;
                 rndSong++;
                     
                 // Add one more slot if Ura is available.
-                if (Global.Database.Items[idx].starUra > 0)
+                if (song.starUra > 0)
                 {
                     rndSlot++;
                         
                     // Disable the song if it would exceed the slot limit.
                     if (rndSlot > Global.Tslot)
-                        Global.Database.Items[idx].isChecked = false;
+                        song.isChecked = false;
                 }
             }
-                
-            if (rndSong == Global.Database.Items.Count) break;
         }
         DBView.Refresh();
     }
@@ -155,13 +154,53 @@ public partial class DlcSelector : Form
     // Clears all selected songs.
     private void ClearDb()
     {
-        for (int i = 0; i <= (DBView.Rows.Count - 1); i++)
-            Global.Database.Items[i].isChecked = false;
+        foreach (SongItem song in Global.Database.Items)
+            song.isChecked = false;
     }
 
-    // Whether to include Official Vita DLCs
+    // Shows or hides official Vita DLC songs.
     private void includeVitaDlc_CheckedChanged(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        ClearHiddenVitaDlcSelection();
+        RefreshSongList();
+    }
+
+    private void RefreshSongList()
+    {
+        songItemBindingSource.DataSource = GetVisibleSongs();
+        DBView.DataSource = songItemBindingSource;
+        DBView.Refresh();
+    }
+
+    private List<SongItem> GetVisibleSongs()
+    {
+        List<SongItem> songs = new();
+
+        foreach (SongItem song in Global.Database.Items)
+        {
+            if (!includeVitaDlc.Checked && IsVitaDlc(song))
+                continue;
+
+            songs.Add(song);
+        }
+
+        return songs;
+    }
+
+    private void ClearHiddenVitaDlcSelection()
+    {
+        if (includeVitaDlc.Checked)
+            return;
+
+        foreach (SongItem song in Global.Database.Items)
+        {
+            if (IsVitaDlc(song))
+                song.isChecked = false;
+        }
+    }
+
+    private static bool IsVitaDlc(SongItem song)
+    {
+        return string.Equals(song.source, VitaDlcSource, StringComparison.OrdinalIgnoreCase);
     }
 }
