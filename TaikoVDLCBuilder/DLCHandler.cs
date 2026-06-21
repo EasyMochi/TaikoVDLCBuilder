@@ -17,7 +17,7 @@ public static class DlcHandler
         progress.Value = 1;
         progress.Minimum = 1;
             
-        // Delete the existing readdcont folder if it is present.
+        // Delete the existing reAddcont folder if it is present.
         if (Directory.Exists(Global.PathDlc))
         {
             MessageBox.Show(Global.MsgDlc2,Global.TlSongSl);
@@ -65,6 +65,7 @@ public static class DlcHandler
             MessageBox.Show(song.folder + Global.MsgDlc3, Global.TlDlc2);
             return;
         }
+        
         string destinationPath = Global.PathWay1 + folderid + Global.PathWay2;
         Directory.CreateDirectory(destinationPath);
 
@@ -104,7 +105,7 @@ public static class DlcHandler
         stream.Position = idPos + 1;
         stream.WriteByte(idBytes[1]);
             
-        // Stop here if the song does not have an Ura chart.
+        // Stop here if the song does not have a Ura chart.
         if (starUra <= 0) return;
         byte[] idUraBytes = BitConverter.GetBytes(id + 1);
             
@@ -194,6 +195,7 @@ public static class DlcHandler
                     organized.Add(data.Items[j]);
             }
         }
+        
         data.Items = organized;
         return data;
     }
