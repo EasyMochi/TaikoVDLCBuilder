@@ -35,6 +35,13 @@ public partial class DlcSelector : Form
         Global.Database = DlcHandler.OrganizeByGenre(Global.Database);
         DBView.AutoSize = true;
         RefreshSongList();
+        
+        // Update view.
+        DBView.CurrentCellDirtyStateChanged += DBView_CurrentCellDirtyStateChanged;
+        DBView.CellValueChanged += DBView_CellValueChanged;
+        
+        UpdateSelectedCounter();
+        
         IntroLabel.Text = Global.WlcmTxt;
     }
 
@@ -142,6 +149,7 @@ public partial class DlcSelector : Form
             }
         }
         DBView.Refresh();
+        UpdateSelectedCounter();
     }
         
     // Handles the Clear button click.
@@ -149,6 +157,7 @@ public partial class DlcSelector : Form
     {
         ClearDb();
         DBView.Refresh();
+        UpdateSelectedCounter();
     }
         
     // Clears all selected songs.
@@ -170,6 +179,7 @@ public partial class DlcSelector : Form
         songItemBindingSource.DataSource = GetVisibleSongs();
         DBView.DataSource = songItemBindingSource;
         DBView.Refresh();
+        UpdateSelectedCounter();
     }
 
     private List<SongItem> GetVisibleSongs()
@@ -202,5 +212,36 @@ public partial class DlcSelector : Form
     private static bool IsVitaDlc(SongItem song)
     {
         return string.Equals(song.source, VitaDlcSource, StringComparison.OrdinalIgnoreCase);
+    }
+    
+    private void DBView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+    {
+        if (DBView.IsCurrentCellDirty)
+            DBView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+    }
+
+    private void DBView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+    {
+        UpdateSelectedCounter();
+    }
+
+    private void UpdateSelectedCounter()
+    {
+        int selectedSongs = 0;
+        int selectedSlots = 0;
+
+        foreach (SongItem song in GetVisibleSongs())
+        {
+            if (!song.isChecked)
+                continue;
+
+            selectedSongs++;
+            selectedSlots++;
+
+            if (song.starUra > 0)
+                selectedSlots++;
+        }
+
+        selectedCounterLabel.Text = $"Selected: {selectedSongs} / Slots: {selectedSlots}";
     }
 }

@@ -49,9 +49,10 @@
             RandomButton = new System.Windows.Forms.Button();
             ClearButton = new System.Windows.Forms.Button();
             BottomPanel = new System.Windows.Forms.Panel();
+            includeVitaDlc = new System.Windows.Forms.CheckBox();
             IntroLabel = new System.Windows.Forms.Label();
             TopPanel = new System.Windows.Forms.Panel();
-            includeVitaDlc = new System.Windows.Forms.CheckBox();
+            selectedCounterLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)DBView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)songItemBindingSource).BeginInit();
             BottomPanel.SuspendLayout();
@@ -236,6 +237,7 @@
             // 
             // BottomPanel
             // 
+            BottomPanel.Controls.Add(selectedCounterLabel);
             BottomPanel.Controls.Add(includeVitaDlc);
             BottomPanel.Controls.Add(RunButton);
             BottomPanel.Controls.Add(ClearButton);
@@ -246,6 +248,16 @@
             BottomPanel.Name = "BottomPanel";
             BottomPanel.Size = new System.Drawing.Size(751, 46);
             BottomPanel.TabIndex = 6;
+            // 
+            // includeVitaDlc
+            // 
+            includeVitaDlc.Location = new System.Drawing.Point(241, 0);
+            includeVitaDlc.Name = "includeVitaDlc";
+            includeVitaDlc.Size = new System.Drawing.Size(115, 45);
+            includeVitaDlc.TabIndex = 6;
+            includeVitaDlc.Text = "Include Vita DLC";
+            includeVitaDlc.UseVisualStyleBackColor = true;
+            includeVitaDlc.CheckedChanged += includeVitaDlc_CheckedChanged;
             // 
             // IntroLabel
             // 
@@ -268,15 +280,14 @@
             TopPanel.Size = new System.Drawing.Size(751, 115);
             TopPanel.TabIndex = 8;
             // 
-            // includeVitaDlc
+            // selectedCounterLabel
             // 
-            includeVitaDlc.Location = new System.Drawing.Point(241, 0);
-            includeVitaDlc.Name = "includeVitaDlc";
-            includeVitaDlc.Size = new System.Drawing.Size(115, 45);
-            includeVitaDlc.TabIndex = 6;
-            includeVitaDlc.Text = "Include Vita DLC";
-            includeVitaDlc.UseVisualStyleBackColor = true;
-            includeVitaDlc.CheckedChanged += includeVitaDlc_CheckedChanged;
+            selectedCounterLabel.Location = new System.Drawing.Point(468, 0);
+            selectedCounterLabel.Name = "selectedCounterLabel";
+            selectedCounterLabel.Size = new System.Drawing.Size(162, 44);
+            selectedCounterLabel.TabIndex = 7;
+            selectedCounterLabel.Text = "Selected: 0 / Slots: 0";
+            selectedCounterLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DlcSelector
             // 
@@ -297,6 +308,8 @@
             TopPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label selectedCounterLabel;
 
         private System.Windows.Forms.CheckBox includeVitaDlc;
 
