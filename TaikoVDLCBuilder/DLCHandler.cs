@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -23,20 +23,34 @@ public static class DlcHandler
             MessageBox.Show(Global.MsgDlc2,Global.TlSongSl);
             DeleteDirectory(Global.PathDlc);
         }
-        uint uniqueId = 105;
-        int folderId = 1;
+
+        ushort nextSongId = Global.FirstCustomInternalSongId;
+        int folderId = Global.FirstCustomDlcFolderNumber;
         progress.Maximum = selectedSongs.Count;
         progress.Step = 1;
-        for (int i = 0; i <= (selectedSongs.Count - 1); i++)
+
+        try
         {
-            string strId = folderId.ToString(Global.HexStart);
-            BuildDlc(selectedSongs[i], uniqueId, strId);
-            uniqueId++;
-            if (selectedSongs[i].starUra > 0) //Songs with Ura takes 2 slots
-                uniqueId++;
-            folderId++;
-            progress.PerformStep();
+            for (int i = 0; i <= (selectedSongs.Count - 1); i++)
+            {
+                bool hasUra = selectedSongs[i].starUra > 0;
+                nextSongId = GetNextAvailableSongId(nextSongId, hasUra);
+
+                string strId = folderId.ToString(Global.HexStart);
+                BuildDlc(selectedSongs[i], nextSongId, strId);
+
+                nextSongId += (ushort)(hasUra ? 2 : 1);
+                folderId++;
+                progress.PerformStep();
+            }
         }
+        catch (InvalidOperationException ex)
+        {
+            MessageBox.Show(ex.Message, Global.TlDlc2);
+            progress.Visible = false;
+            return;
+        }
+
         MessageBox.Show(Global.MsgDlc1, Global.TlDlc1);
         progress.Visible = false;
     }
@@ -105,6 +119,49 @@ public static class DlcHandler
         stream.WriteByte(idBytes[0]);
         stream.Position = uraPos + 3;
         stream.WriteByte(idBytes[1]);
+    }
+
+    private static ushort GetNextAvailableSongId(ushort startId, bool needsUraPair)
+    {
+        for (int id = startId; id <= Global.LastCustomInternalSongId; id++)
+        {
+            ushort normalId = (ushort)id;
+            if (IsReservedInternalSongId(normalId))
+                continue;
+
+            if (!needsUraPair)
+                return normalId;
+
+            if (id >= Global.LastCustomInternalSongId)
+                break;
+
+            ushort uraId = (ushort)(id + 1);
+            if (!IsReservedInternalSongId(uraId))
+                return normalId;
+        }
+
+        throw new InvalidOperationException("No free internal SongInfo IDs left in the safe custom range.");
+    }
+
+    private static bool IsReservedInternalSongId(ushort id)
+    {
+        // Base game songs.
+        if (id is >= 1 and <= 77)
+            return true;
+
+        if (id is >= 79 and <= 104)
+            return true;
+
+        // Official DLC songs. The official DLC scan found IDs from 200 to 319.
+        // Reserve the whole block, including gaps, to avoid DLC-zone collisions.
+        if (id is >= 200 and <= 319)
+            return true;
+
+        // Base game story/special/test entries.
+        if (id is >= 1000 and <= 1184)
+            return true;
+
+        return id == 2000;
     }
         
     //Directory Deleter
