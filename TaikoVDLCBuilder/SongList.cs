@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TaikoVDLCBuilder
 {
@@ -14,7 +11,7 @@ namespace TaikoVDLCBuilder
     public class SongItem
     {
         // List with genre names
-        private readonly string[] gnrNames = {
+        private readonly string[] _gnrNames = {
             "J-POP",
             "VOCALOID",
             "Variety",
@@ -24,7 +21,7 @@ namespace TaikoVDLCBuilder
             "Anime"
         };
         // List with genre colors
-        private readonly Color[] gnrColors = {
+        private readonly Color[] _gnrColors = {
             Color.SkyBlue,
             Color.LightGray,
             Color.LimeGreen,
@@ -34,7 +31,7 @@ namespace TaikoVDLCBuilder
             Color.SandyBrown
         };
         // List with star names
-        private readonly string[] starNames = {
+        private readonly string[] _starNames = {
             "--",
             "★1",
             "★2",
@@ -49,7 +46,7 @@ namespace TaikoVDLCBuilder
         };
         public bool isChecked { get; set; }
         public string name { get; set; }
-        public string nameJP { get; set; }
+        public string nameJp { get; set; }
         public int genreNo { get; set; }
         public string genreName
         {
@@ -57,7 +54,7 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return gnrNames[genreNo];
+                    return _gnrNames[genreNo];
                 }
                 catch
                 {
@@ -71,7 +68,7 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return gnrColors[genreNo];
+                    return _gnrColors[genreNo];
                 }
                 catch
                 {
@@ -87,11 +84,11 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return starNames[starEasy];
+                    return _starNames[starEasy];
                 }
                 catch
                 {
-                    return starNames[0];
+                    return _starNames[0];
                 }
             }
         }
@@ -102,11 +99,11 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return starNames[starNormal];
+                    return _starNames[starNormal];
                 }
                 catch
                 {
-                    return starNames[0];
+                    return _starNames[0];
                 }
             }
         }
@@ -117,11 +114,11 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return starNames[starHard];
+                    return _starNames[starHard];
                 }
                 catch
                 {
-                    return starNames[0];
+                    return _starNames[0];
                 }
             }
         }
@@ -132,11 +129,11 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return starNames[starMania];
+                    return _starNames[starMania];
                 }
                 catch
                 {
-                    return starNames[0];
+                    return _starNames[0];
                 }
             }
         }
@@ -147,11 +144,11 @@ namespace TaikoVDLCBuilder
             {
                 try
                 {
-                    return starNames[starUra];
+                    return _starNames[starUra];
                 }
                 catch
                 {
-                    return starNames[0];
+                    return _starNames[0];
                 }
             }
         }

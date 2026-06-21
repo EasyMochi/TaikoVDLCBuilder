@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
 namespace TaikoVDLCBuilder
 {
-    public partial class DLCSelector : Form
+    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
+    public partial class DlcSelector : Form
     {
-        public DLCSelector()
+        public DlcSelector()
         {
             InitializeComponent();
         }
@@ -22,21 +18,21 @@ namespace TaikoVDLCBuilder
         private void DLCSelector_Load(object sender, EventArgs e)
         {
             //Check if file exist
-            if (!File.Exists(Global.PathJSON))
+            if (!File.Exists(Global.PathJson))
             {
-                MessageBox.Show(Global.MsgJSON);
-                System.Environment.Exit(1);
+                MessageBox.Show(Global.MsgJson);
+                Environment.Exit(1);
             }
             RunPBar.Visible = false;
             //Parse songdata.json to object
-            string jsonfile = File.ReadAllText(Global.PathJSON);
-            Global.database = JsonConvert.DeserializeObject<SongList>(jsonfile);
+            string jsonfile = File.ReadAllText(Global.PathJson);
+            Global.Database = JsonConvert.DeserializeObject<SongList>(jsonfile);
             //Sort by genre
-            Global.database = DLCHandler.organizebyGenre(Global.database);
-            BindingSource sorce = new BindingSource();
-            sorce.DataSource = Global.database.Itens;
+            Global.Database = DlcHandler.OrganizebyGenre(Global.Database);
+            BindingSource source = new();
+            source.DataSource = Global.Database.Itens;
             DBView.AutoSize = true;
-            DBView.DataSource = sorce;
+            DBView.DataSource = source;
             DBView.Refresh();
             IntroLabel.Text = Global.WlcmTxt;
         }
@@ -46,33 +42,33 @@ namespace TaikoVDLCBuilder
             int nslot = 0;
             int nsong = 0;
             //List selected songs
-            List<SongItem> selectedsongs = new List<SongItem>();
+            List<SongItem> selectedsongs = new();
             //Check how many songs has been selected
             for (int i = 0; i <= (DBView.Rows.Count - 1); i++)
             {
-                if (Global.database.Itens[i].isChecked == true)
+                if (Global.Database.Itens[i].isChecked)
                 {
                     nsong++;
                     nslot++;
                     //If has Ura add one more slot
-                    if (Global.database.Itens[i].starUra > 0)
+                    if (Global.Database.Itens[i].starUra > 0)
                     {
                         nslot++;
                     }
-                    selectedsongs.Add(Global.database.Itens[i]);
+                    selectedsongs.Add(Global.Database.Itens[i]);
                 }
             }
             string ms1 = Global.MsgSongSl1 + nsong + Global.MsgSongSl2 + nslot + Global.MsgSongSl3;
-            string ms2 = Global.MsgSongSl4 + (Global.tslot - nslot) + Global.MsgSongSl3;
+            string ms2 = Global.MsgSongSl4 + (Global.Tslot - nslot) + Global.MsgSongSl3;
             //No song selected
             if (nslot == 0)
             {
                 MessageBox.Show(Global.MsgSongSl7, Global.TlSongSl);
-            } else if (nslot > Global.tslot)  //More songs selected than limit
+            } else if (nslot > Global.Tslot)  //More songs selected than limit
             {
                 MessageBox.Show(ms1 + Global.MsgSongSl6, Global.TlSongSl);
             }
-            else if (nsong > Global.tsong)  //More songs selected than limit
+            else if (nsong > Global.Tsong)  //More songs selected than limit
             {
                 MessageBox.Show(ms1 + Global.MsgSongSl8, Global.TlSongSl);
             }
@@ -83,7 +79,7 @@ namespace TaikoVDLCBuilder
                 DialogResult result = MessageBox.Show(message, Global.TlSongSl, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
-                    DLCHandler.InitializeDLC(RunPBar,selectedsongs);
+                    DlcHandler.InitializeDlc(RunPBar,selectedsongs);
                 }
             }
         }
@@ -107,33 +103,33 @@ namespace TaikoVDLCBuilder
         {
             int rndslt = 0;
             int rndsng = 0;
-            Random rnd = new Random();
+            Random rnd = new();
             int idx;
             //Clear all selection
-            ClearDB();
+            ClearDb();
             //Repeat while limit is not reached or number of songs is lower than total
-            while (rndsng < Global.tsong)
+            while (rndsng < Global.Tsong)
             {
                 //Get a random song
                 idx = rnd.Next(DBView.Rows.Count);
                 //Select song only if it's not selected
-                if (Global.database.Itens[idx].isChecked == false)
+                if (Global.Database.Itens[idx].isChecked == false)
                 {
-                    Global.database.Itens[idx].isChecked = true;
+                    Global.Database.Itens[idx].isChecked = true;
                     rndslt++;
                     rndsng++;
                     //Add 1 more slot if Ura is avaible
-                    if (Global.database.Itens[idx].starUra > 0)
+                    if (Global.Database.Itens[idx].starUra > 0)
                     {
                         rndslt++;
                         //Check if the song limit is reached and disable the ura song (to avoid limit + 1)
-                        if (rndslt > Global.tslot)
+                        if (rndslt > Global.Tslot)
                         {
-                            Global.database.Itens[idx].isChecked = false;
+                            Global.Database.Itens[idx].isChecked = false;
                         }
                     }
                 }
-                if (rndsng == Global.database.Itens.Count)
+                if (rndsng == Global.Database.Itens.Count)
                 {
                     break;
                 }
@@ -143,15 +139,15 @@ namespace TaikoVDLCBuilder
         //Clear button click
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            ClearDB();
+            ClearDb();
             DBView.Refresh();
         }
         //Function to clear all selection
-        private void ClearDB()
+        private void ClearDb()
         {
             for (int i = 0; i <= (DBView.Rows.Count - 1); i++)
             {
-                Global.database.Itens[i].isChecked = false;
+                Global.Database.Itens[i].isChecked = false;
             }
         }
     }

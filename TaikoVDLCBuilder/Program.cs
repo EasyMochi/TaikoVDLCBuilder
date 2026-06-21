@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
 namespace TaikoVDLCBuilder
 {
+    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
     static class Program
     {
         /// <summary>
@@ -16,7 +15,7 @@ namespace TaikoVDLCBuilder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DLCSelector());
+            Application.Run(new DlcSelector());
         }
     }
 }
