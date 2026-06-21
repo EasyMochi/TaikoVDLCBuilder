@@ -4,8 +4,8 @@ public static class Global
 {
     public static SongList Database;
     public static readonly int[] GenreVita = [0, 6, 1, 2, 5, 4, 3];
-    public const int Tslot = 275; //Collision-safe custom SongInfo ID slots
-    public const int Tsong = 275; //Normal-only maximum inside the collision-safe custom range
+    public const int Tslot = 275; // Collision-safe custom SongInfo ID slots.
+    public const int Tsong = 275; // Normal-only maximum inside the collision-safe custom range.
     public const string HexStart = "D3";
     public const int FirstCustomDlcFolderNumber = 112;
     public const ushort FirstCustomInternalSongId = 105;
@@ -32,5 +32,5 @@ public static class Global
     public const string TlDlc1 = "Clear";
     public const string TlDlc2 = "Error";
     public const string TlSongSl = "Attention";
-    public const string WlcmTxt = "Taiko no Tatsujin V Version - DLC Builder (1.0.2)\nMade By DespairOfHarmony\n\nThis builder avoids base-game and official DLC SongInfo ID collisions.\nCustom DLC folders start at TAIKOV1SONG112JH. Internal SongInfo IDs use the safe custom range 105-499 while skipping official DLC IDs 200-319.\nYou can select up to 275 collision-safe slots, each song will take one slot,\nbut songs with Ura difficulty will take one more slot.\nREMEMBER: backup your save if you have older DLC scores, because they may be overlapped.";
+    public const string WlcmTxt = "Taiko no Tatsujin V Version - DLC Builder (2.0.0)\nMade by DespairOfHarmony and EasyMochi\n\nThis builder avoids base-game and official DLC SongInfo ID collisions.\nCustom DLC folders start at TAIKOV1SONG112JH. Internal SongInfo IDs use the safe custom range 105-499 while skipping official DLC IDs 200-319.\nYou can select up to 275 collision-safe slots, each song will take one slot,\nbut songs with Ura difficulty will take one more slot.\nREMEMBER: backup your save if you have older DLC scores, because they may be overlapped.";
 }
