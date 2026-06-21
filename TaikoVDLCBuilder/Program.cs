@@ -2,20 +2,19 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
-namespace TaikoVDLCBuilder
+namespace TaikoVDLCBuilder;
+
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
+internal static class Program
 {
-    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
-    static class Program
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DlcSelector());
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new DlcSelector());
     }
 }
